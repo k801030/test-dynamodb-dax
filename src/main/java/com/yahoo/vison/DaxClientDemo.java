@@ -18,7 +18,7 @@ public class DaxClientDemo {
       client = DynamoDBHelper.getDynamoDBClient();
     }
 
-    HashMap<String, AttributeValue> key = new HashMap<>();
+    HashMap<String, AttributeValue> key = new HashMap<String, AttributeValue>();
     key.put("appId", new AttributeValue().withS("com.yahoo.taipei.bus"));
 
     QueryRequest queryRequest = new QueryRequest()
