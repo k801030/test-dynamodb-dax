@@ -22,7 +22,7 @@ java -jar target/test-dynamodb-dax-1.0-SNAPSHOT-jar-with-dependencies.jar
 ```
 java -jar target/test-dynamodb-dax-1.0-SNAPSHOT-jar-with-dependencies.jar [DAX cluster endpoint]
 ```
-4. Compare the results
+4. Compare the results in the console
 
 ```
 ==== Iteration 1 ====
@@ -43,6 +43,6 @@ Duration: 1532.593 ms
 
 [DAX](https://aws.amazon.com/dynamodb/dax/?nc1=h_ls) is a fully-mananged, in-memory cached for DynamoDB.
 
-### How to run a service using DAX?
+### How to deploy a service with DAX?
 
 DaAX can be deployed in EC2 only. [Here](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.client.sample-app.html) is a tutorial about how to running a sample app.
