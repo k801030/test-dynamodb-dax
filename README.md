@@ -45,4 +45,4 @@ Duration: 1532.593 ms
 
 ### How to deploy a service with DAX?
 
-DaAX can be deployed in EC2 only. [Here](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.client.sample-app.html) is a tutorial about how to running a sample app.
+DAX can be deployed in EC2 only. [Here](https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DAX.client.sample-app.html) is a tutorial about how to running a sample app.
