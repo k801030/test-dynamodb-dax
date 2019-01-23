@@ -7,73 +7,64 @@ import com.amazonaws.services.dynamodbv2.model.QueryResult;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class DaxClientDemo {
 
-  private static String endpoint = "vison-dax2.mkbllw.clustercfg.dax.use2.cache.amazonaws.com:8111";
-  static AmazonDynamoDB client;
-
-  public static void main(String[] args) throws Exception {
+  public static void main(String[] args) {
+    // setup
+    AmazonDynamoDB client;
+    String endpoint = null;
+    String tableName;
+    String region;
     if (args.length >= 1) {
-      client = DynamoDBHelper.getDaxClient(args[0]);
+      endpoint = args[0];
+    }
+    tableName = System.getenv("TABLE_NAME");
+    region = System.getenv("REGION");
+
+
+    DynamoDBHelper helper = new DynamoDBHelper(region);
+    if (endpoint != null) {
+      client = helper.getDaxClient(endpoint);
     } else {
-      client = DynamoDBHelper.getDynamoDBClient();
+      client = helper.getDynamoDBClient();
     }
 
-    MyRunnable.init();
-    ExecutorService executorService = Executors.newFixedThreadPool(100);
-    for (int i = 0; i < 100; i++) {
-      executorService.execute(new MyRunnable(client, i + 1));
+    List<QueryRequest> requests = generateRequests(tableName);
+
+    for (int i = 0; i < 5; i++) {
+      System.out.printf("==== Iteration %d ====\n", i + 1);
+      for (QueryRequest request : requests) {
+        long start = System.nanoTime();
+        client.query(request);
+        long end = System.nanoTime();
+        System.out.printf("Duration: %.3f ms\n", (end - start) / (1000000.0));
+      }
     }
-
-    // System.out.println(result.getCount());
-  }
-}
-
-class MyRunnable implements Runnable {
-
-  static List<QueryRequest> requests = new ArrayList<QueryRequest>();
-  int index;
-  AmazonDynamoDB client;
-
-  public MyRunnable(AmazonDynamoDB client, int index) {
-    this.index = index;
-    this.client = client;
   }
 
-  public static void init() {
+  private static List<QueryRequest> generateRequests(String tableName) {
+    List<QueryRequest> requests = new ArrayList<QueryRequest>();
     HashMap<String, AttributeValue> key = new HashMap<String, AttributeValue>();
     key.put(":a", new AttributeValue().withS("com.yahoo.taipei.bus"));
-
     requests.add(new QueryRequest()
-        .withTableName("vison-feed-db")
+        .withTableName(tableName)
         .withKeyConditionExpression("appId = :a")
         .withExpressionAttributeValues(key)
         .withLimit(3000)
     );
     requests.add(new QueryRequest()
-        .withTableName("vison-feed-db")
+        .withTableName(tableName)
         .withKeyConditionExpression("appId = :a")
         .withExpressionAttributeValues(key)
         .withLimit(4000)
     );
     requests.add(new QueryRequest()
-        .withTableName("vison-feed-db")
+        .withTableName(tableName)
         .withKeyConditionExpression("appId = :a")
         .withExpressionAttributeValues(key)
         .withLimit(5000)
     );
-  }
-
-  public void run() {
-    System.out.printf("==== Iterator %d ====\n", index);
-    for (QueryRequest request : requests) {
-      long start = System.nanoTime();
-      QueryResult result = client.query(request);
-      long end = System.nanoTime();
-      System.out.printf("Duration: %.3f ms\n", (end - start) / (1000000.0));
-    }
+    return requests;
   }
 }
