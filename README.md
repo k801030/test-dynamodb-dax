@@ -23,6 +23,8 @@ java -jar target/test-dynamodb-dax-1.0-SNAPSHOT-jar-with-dependencies.jar
 java -jar target/test-dynamodb-dax-1.0-SNAPSHOT-jar-with-dependencies.jar [DAX cluster endpoint]
 ```
 
+## Reference
+
 ### What is DAX?
 
 [DAX](https://aws.amazon.com/dynamodb/dax/?nc1=h_ls) is a fully-mananged, in-memory cached for DynamoDB.
