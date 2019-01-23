@@ -15,12 +15,12 @@ mvn package
 
 2. Run with DynamoDB
 ```
-java -jar target/test-dynamodb-dax-1.0-SNAPSHOT-jar-with-dependencies.jar 
+java -jar target/test-dax.jar 
 ```
 
 3. Run with DAX
 ```
-java -jar target/test-dynamodb-dax-1.0-SNAPSHOT-jar-with-dependencies.jar [DAX cluster endpoint]
+java -jar target/test-dax.jar [DAX cluster endpoint]
 ```
 4. Compare the results in the console
 
