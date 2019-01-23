@@ -22,6 +22,20 @@ java -jar target/test-dynamodb-dax-1.0-SNAPSHOT-jar-with-dependencies.jar
 ```
 java -jar target/test-dynamodb-dax-1.0-SNAPSHOT-jar-with-dependencies.jar [DAX cluster endpoint]
 ```
+4. Compare the results
+
+```
+==== Iteration 1 ====
+Duration: 2555.396 ms
+Duration: 965.828 ms
+Duration: 1301.714 ms
+==== Iteration 2 ====
+Duration: 1044.976 ms
+Duration: 1242.509 ms
+Duration: 1532.593 ms
+==== Iteration 3 ====
+...
+```
 
 ## Reference
 
