@@ -1,0 +1,36 @@
+# Logs created by local execution
+logs/
+test-output/
+
+# Eclipse files
+.project
+.classpath
+bin/
+.settings/
+
+# IntelliJ files
+*.iml
+*.ipr
+.idea/
+build/
+
+# VS Code
+.vscode
+
+# Maven files
+**/target/*
+
+# Build files
+/.metadata/
+
+# Sonar scanner files
+.scannerwork/
+
+# Auth certs / keys
+auth/
+
+# Validation
+.checkstyle
+
+# Tests
+**/test-output/*
